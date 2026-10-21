@@ -1,12 +1,13 @@
 public class Main {
     public static void main(String[] args) {
-        Pizza pizza = new PlainPizza();
+        Player player = new Player(new Walking());
+        player.move();
 
-        pizza = new Cheese(pizza);
-        pizza = new Olives(pizza);
-        pizza = new Pineapple(pizza);
+        player.setMovementStrategy(new Skateboarding());
+        player.move();
 
-        System.out.println(pizza.getDescription());
-        System.out.println("Total: $" + pizza.getCost());
+        // Switch movement mid-run without if/else.
+        player.setMovementStrategy(new Jetpack());
+        player.move();
     }
 }
