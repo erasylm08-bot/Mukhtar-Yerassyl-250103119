@@ -1,37 +1,74 @@
+
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("=== TASK 1: The Bouncer ===");
-        Image guest = new ProxyImage("salary_sheet.png", "GUEST");
-        Image admin = new ProxyImage("salary_sheet.png", "ADMIN");
-        guest.show();
-        admin.show();
 
-        System.out.println("\n=== TASK 2: The View Counter ===");
-        Video video = new ProxyVideo("Cat_Memes.mp4");
-        video.play();
-        video.play();
-        video.play();
+        FlightBookingFacade bookingFacade = new FlightBookingFacade();
+        System.out.println("=== TEST 1: Successful Booking ===");
 
-        System.out.println("\n=== TASK 3: School Wi-Fi Firewall ===");
-        Internet schoolInternet = new SchoolProxyInternet();
-        schoolInternet.connectTo("wikipedia.org");
-        schoolInternet.connectTo("gaming.com");
+        String ticket1 = bookingFacade.bookFlight(
+                "Amina Suleimenova",
+                "KC101",
+                "14A",
+                320.00,
+                2,
+                23.0,
+                "EUR",
+                "4532015112830366"
+        );
 
-        System.out.println("\n=== TASK 4: Smart Light ===");
-        Device light = new SmartLight();
-        AdvancedRemote remote = new AdvancedRemote(light);
-        remote.powerOn();
-        remote.mute();
+        System.out.println("Result 1: " + ticket1);
+        System.out.println();
 
-        System.out.println("\n=== TASK 5: Party Remote ===");
-        Device radio = new Radio();
-        PartyRemote partyRemote = new PartyRemote(radio);
-        partyRemote.partyMode();
 
-        System.out.println("\n=== TASK 6: RPG Weapon System ===");
-        Hero knightWithSword = new Knight(new Sword());
-        Hero knightWithWand = new Knight(new MagicWand());
-        knightWithSword.attack();
-        knightWithWand.attack();
+        System.out.println("=== TEST 2: Blocked Seat ===");
+
+        String ticket2 = bookingFacade.bookFlight(
+                "Daniyar Kassymov",
+                "KC101",
+                "13C",
+                320.00,
+                1,
+                15.0,
+                "USD",
+                "4532015112830366"
+        );
+
+        System.out.println("Result 2: " + ticket2);
+        System.out.println();
+
+
+        System.out.println("=== TEST 3: Payment Failure and Rollback ===");
+
+        String ticket3 = bookingFacade.bookFlight(
+                "Timur Bekov",
+                "KC101",
+                "07D",
+                320.00,
+                1,
+                18.0,
+                "KZT",
+                "9999"
+        );
+
+        System.out.println("Result 3: " + ticket3);
+        System.out.println();
+
+
+        System.out.println("=== TEST 4: SILVER Loyalty Tier ===");
+
+        String ticket4 = bookingFacade.bookFlight(
+                "Erasyl Mukhtar",
+                "KC101",
+                "08C",
+                320.00,
+                3,
+                30.0,
+                "EUR",
+                "4532015112830366",
+                "SILVER"
+        );
+
+        System.out.println("Result 4: " + ticket4);
     }
 }
